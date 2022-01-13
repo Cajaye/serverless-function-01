@@ -1,0 +1,20 @@
+{
+  "name": "serverless-function",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/api/index.ts",
+  "scripts": {
+    "start": "vercel dev",
+    "deploy": "vercel deploy --prod"
+  },
+  "keywords": [],
+  "author": "Ca-Jaye Clarke",
+  "license": "MIT",
+  "devDependencies": {
+    "@vercel/node": "^1.12.1"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^7.6.0",
+    "dotenv": "^11.0.0"
+  }
+}
