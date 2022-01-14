@@ -3,9 +3,10 @@ import dotenv from "dotenv";
 dotenv.config();
 import sgMail from "@sendgrid/mail";
 
-const allowCors = (fn) => async (req, res) => {
-  res.setHeader("Access-Control-Allow-Credentials", true);
+const allowCors = (fn) => async (req: VercelRequest, res: VercelResponse) => {
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Content-type", "application/json; charset=utf-8");
   // another option
   // res.setHeader('Access-Control-Allow-Origin', req.header.origin);
   res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,POST");
@@ -32,16 +33,6 @@ try {
 const MY_EMAIL_ADDRESS = process.env.TO_EMAIL;
 
 async function handler(request: VercelRequest, response: VercelResponse) {
-  if (request.method === "POST" && !request.body) {
-    return response
-      .status(404)
-      .json({ msg: "Please fill in all input fields" });
-  } else {
-    response
-      .status(200)
-      .send(`<h1 style="text-align:center;">Hello aliens🚀</h1>`);
-  }
-
   if (request.method === "POST") {
     try {
       const { email, name, body } = request.body;
@@ -53,7 +44,7 @@ async function handler(request: VercelRequest, response: VercelResponse) {
         html: `${body} from ${name},${email}`,
       };
       await sgMail.send(msg);
-      return response.status(200).json({ msg: "Email sent" });
+      return response.status(200).json({ msg: "message sent" });
     } catch (error) {
       console.log("ERROR", error);
       response.status(400).send("Email not sent.");
