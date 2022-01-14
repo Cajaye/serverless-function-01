@@ -36,6 +36,10 @@ async function handler(request: VercelRequest, response: VercelResponse) {
     return response
       .status(404)
       .json({ msg: "Please fill in all input fields" });
+  } else {
+    response
+      .status(200)
+      .send(`<h1 style="text-align:center;">Hello aliens🚀</h1>`);
   }
 
   if (request.method === "POST") {
