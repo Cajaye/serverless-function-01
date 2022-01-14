@@ -49,6 +49,8 @@ async function handler(request: VercelRequest, response: VercelResponse) {
       console.log("ERROR", error);
       response.status(400).send("Email not sent.");
     }
+  } else {
+    return response.status(200).send("Hello");
   }
 }
 
